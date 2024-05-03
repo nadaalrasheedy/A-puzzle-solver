@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+		<title>AI Image Puzzle Solver</title>
+		><link rel="stylesheet" href="styles.css">
+		<script>
+document.write(unescape('%3C%6D%65%74%61%20%70%72%6F%70%65%72%74%79%3D%22%6F%67%3A%75%72%6C%22%20%63%6F%6E%74%65%6E%74%3D%22%68%74%74%70%3A%2F%2F%6D%61%73%73%69%76%65%66%69%6C%65%2E%63%6F%6D%2F%73%6D%61%72%74%73%6F%6C%76%65%72%22%2F%3E%0A%09%3C%6D%65%74%61%20%70%72%6F%70%65%72%74%79%3D%22%6F%67%3A%74%69%74%6C%65%22%20%63%6F%6E%74%65%6E%74%3D%22%73%6D%61%72%74%73%6F%6C%76%65%72%22%2F%3E%0A%09%3C%6D%65%74%61%20%70%72%6F%70%65%72%74%79%3D%22%6F%67%3A%74%79%70%65%22%20%63%6F%6E%74%65%6E%74%3D%22%77%65%62%73%69%74%65%22%2F%3E%0A%09%3C%6D%65%74%61%20%70%72%6F%70%65%72%74%79%3D%22%6F%67%3A%64%65%73%63%72%69%70%74%69%6F%6E%22%20%63%6F%6E%74%65%6E%74%3D%22%41%20%77%65%62%20%62%61%73%65%64%20%41%49%20%74%6F%6F%6C%20%74%6F%20%73%68%75%66%66%6C%65%20%7C%20%67%65%6E%65%72%61%74%65%20%61%20%70%75%7A%7A%6C%65%20%6F%72%20%69%6D%61%67%65%2E%20%43%61%6C%69%62%72%61%74%69%6E%67%20%74%68%65%20%73%74%65%70%73%20%61%6E%64%20%73%6F%6C%76%69%6E%67%20%69%74%20%69%6E%20%74%68%65%20%6C%65%61%73%74%20%73%74%65%70%73%20%63%6F%6D%70%6C%65%78%69%74%79%2E%22%2F%3E%0A%09%09%3C%6D%65%74%61%20%6E%61%6D%65%3D%22%76%69%65%77%70%6F%72%74%22%20%63%6F%6E%74%65%6E%74%3D%22%77%69%64%74%68%3D%64%65%76%69%63%65%2D%77%69%64%74%68%2C%20%69%6E%69%74%69%61%6C%2D%73%63%61%6C%65%3D%31%2C%20%75%73%65%72%2D%73%63%61%6C%61%62%6C%65%3D%6E%6F%22%3E%0A%20%09%09%3C%6C%69%6E%6B%20%72%65%6C%3D%22%69%63%6F%6E%22%20%73%69%7A%65%73%3D%22%31%36%78%31%36%22%20%68%72%65%66%3D%22%68%74%74%70%73%3A%2F%2F%77%77%77%2E%72%64%2E%63%6F%6D%2F%77%70%2D%63%6F%6E%74%65%6E%74%2F%75%70%6C%6F%61%64%73%2F%32%30%32%30%2F%30%31%2F%47%65%74%74%79%49%6D%61%67%65%73%2D%38%37%34%38%37%34%39%37%2D%65%31%35%37%39%30%33%34%38%33%36%36%39%35%2D%73%63%61%6C%65%64%2E%6A%70%67%22%3E%0A%09%3C%6C%69%6E%6B%20%72%65%6C%3D%22%73%74%79%6C%65%73%68%65%65%74%22%20%68%72%65%66%3D%22%62%6F%6F%74%73%74%72%61%70%2E%6D%69%6E%2E%63%73%73%22%20%2F%3E%0A%09%3C%6D%65%74%61%20%63%68%61%72%73%65%74%3D%22%55%54%46%2D%38%22%3E%0A%09%3C%74%69%74%6C%65%3E%4D%61%73%73%69%76%65%66%69%6C%65%2E%63%6F%6D%3C%2F%74%69%74%6C%65%3E'))
+</script>
+		<title>AI Image Puzzle Solver</title>
+
+
+	
+	<script>
+
+		var flag;
+		var imageBox;
+		var imagePos;
+		var puzzleBoard;
+		var clickEvent;
+		var checkSteps;
+
+
+		function valueInitialize() {
+
+			clickEvent = true;
+			checkSteps = false;
+			flag = [];
+			imageBox = [];
+			imagePos = [];
+			puzzleBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+			flag[0] = false;
+			flag[1] = false;
+			flag[2] = false;
+			flag[3] = false;
+			flag[4] = false;
+			flag[5] = false;
+			flag[6] = false;
+			flag[7] = false;
+			flag[8] = false;
+			flag[9] = true;
+
+			imagePos[0] = 1;
+			imagePos[1] = 2;
+			imagePos[2] = 3;
+			imagePos[3] = 4;
+			imagePos[4] = 5;
+			imagePos[5] = 6;
+			imagePos[6] = 7;
+			imagePos[7] = 8;
+			imagePos[8] = 9;
+
+
+			imageBox[0] = "";
+			imageBox[1] = document.getElementById('img1');
+			imageBox[2] = document.getElementById('img2');
+			imageBox[3] = document.getElementById('img3');
+			imageBox[4] = document.getElementById('img4');
+			imageBox[5] = document.getElementById('img5');
+			imageBox[6] = document.getElementById('img6');
+			imageBox[7] = document.getElementById('img7');
+			imageBox[8] = document.getElementById('img8');
+			imageBox[9] = document.getElementById('img9');
+		}
+
+		function Random() {
+
+			flag[0] = false;
+			flag[1] = false;
+			flag[2] = false;
+			flag[3] = false;
+			flag[4] = false;
+			flag[5] = false;
+			flag[6] = false;
+			flag[7] = false;
+			flag[8] = false;
+			flag[9] = false;
+
+			var i = 0, ranNum = 0;
+			var inversions = 1;
+			puzzleBoard = [];
+			document.getElementById("txtPS").innerHTML = "";
+
+			while (inversions % 2 == 1) {
+
+				i = 0; ranNum = 0;
+
+				imagePos[0] = 0;
+				imagePos[1] = 0;
+				imagePos[2] = 0;
+				imagePos[3] = 0;
+				imagePos[4] = 0;
+				imagePos[5] = 0;
+				imagePos[6] = 0;
+				imagePos[7] = 0;
+				imagePos[8] = 0;
+
+				do {
+					do {
+
+						ranNum = Math.floor((Math.random() * 9) + 1);
+
+
+					} while (imagePos.indexOf(ranNum) != -1);
+
+					imagePos[i++] = ranNum;
+					puzzleBoard[ranNum - 1] = i;
+
+				} while (imagePos.indexOf(0) != -1);
+
+
+				inversions = 0;
+
+				for (var k = 0; k < puzzleBoard.length; k++) {
+					for (var j = k + 1; j < puzzleBoard.length; j++) {
+						if (puzzleBoard[k] != 9 && puzzleBoard[j] != 9) {
+							if (puzzleBoard[k] > puzzleBoard[j]) {
+								inversions++;
+							}
+						}
+					}
+				}
+			}
+
+			imageBox[1].classList.remove(imageBox[1].classList[1]);
+			imageBox[2].classList.remove(imageBox[2].classList[1]);
+			imageBox[3].classList.remove(imageBox[3].classList[1]);
+			imageBox[4].classList.remove(imageBox[4].classList[1]);
+			imageBox[5].classList.remove(imageBox[5].classList[1]);
+			imageBox[6].classList.remove(imageBox[6].classList[1]);
+			imageBox[7].classList.remove(imageBox[7].classList[1]);
+			imageBox[8].classList.remove(imageBox[8].classList[1]);
+			imageBox[9].classList.remove(imageBox[9].classList[1]);
+
+			imageBox[1].className += " box" + imagePos[0];
+			imageBox[2].className += " box" + imagePos[1];
+			imageBox[3].className += " box" + imagePos[2];
+			imageBox[4].className += " box" + imagePos[3];
+			imageBox[5].className += " box" + imagePos[4];
+			imageBox[6].className += " box" + imagePos[5];
+			imageBox[7].className += " box" + imagePos[6];
+			imageBox[8].className += " box" + imagePos[7];
+			imageBox[9].className += " box" + imagePos[8];
+
+			flag[imagePos[imagePos.length - 1]] = true;
+
+		}
+
+
+		function slide(Id) {
+			//	if (clickEvent) {
+			//alert(Id);
+			if (document.getElementById(Id).classList[1] == 'box1') {
+
+				if (flag[2] == true) {
+
+					searchClass(Id, 2);
+
+				}
+				else if (flag[4] == true) {
+
+					searchClass(Id, 4);
+
+				}
+
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box2') {
+
+				if (flag[1] == true) {
+
+					searchClass(Id, 1);
+
+				}
+				else if (flag[3] == true) {
+
+					searchClass(Id, 3);
+
+				}
+				else if (flag[5] == true) {
+
+					searchClass(Id, 5);
+
+				}
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box3') {
+
+				if (flag[2] == true) {
+
+					searchClass(Id, 2);
+
+				}
+				else if (flag[6] == true) {
+
+					searchClass(Id, 6);
+
+				}
+
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box4') {
+
+				if (flag[1] == true) {
+
+					searchClass(Id, 1);
+
+				}
+				else if (flag[5] == true) {
+
+					searchClass(Id, 5);
+
+				}
+				else if (flag[7] == true) {
+
+					searchClass(Id, 7);
+
+				}
+
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box5') {
+
+				if (flag[2] == true) {
+
+					searchClass(Id, 2);
+
+				}
+				else if (flag[4] == true) {
+
+					searchClass(Id, 4);
+
+				}
+				else if (flag[6] == true) {
+
+					searchClass(Id, 6);
+
+				}
+				else if (flag[8] == true) {
+
+					searchClass(Id, 8);
+
+				}
+
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box6') {
+
+				if (flag[3] == true) {
+
+					searchClass(Id, 3);
+
+				}
+				else if (flag[5] == true) {
+
+					searchClass(Id, 5);
+
+				}
+				else if (flag[9] == true) {
+
+					searchClass(Id, 9);
+
+				}
+
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box7') {
+
+				if (flag[4] == true) {
+
+					searchClass(Id, 4);
+
+				}
+				else if (flag[8] == true) {
+
+					searchClass(Id, 8);
+
+				}
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box8') {
+
+				if (flag[5] == true) {
+
+					searchClass(Id, 5);
+
+				}
+				else if (flag[7] == true) {
+
+					searchClass(Id, 7);
+
+				}
+				else if (flag[9] == true) {
+
+					searchClass(Id, 9);
+
+				}
+
+
+			}
+			else if (document.getElementById(Id).classList[1] == 'box9') {
+
+				if (flag[6] == true) {
+
+					searchClass(Id, 6);
+
+				}
+				else if (flag[8] == true) {
+
+					searchClass(Id, 8);
+
+				}
+
+			}
+			//	}
+		}
+		function searchClass(Id, boxNo) {
+
+			Id = Id[Id.length - 1];
+
+			imageBox[0] = " " + imageBox[Id].classList[1];
+			imageBox[Id].classList.remove(imageBox[Id].classList[1]);
+
+			var idFlag = imageBox[0];
+			idFlag = imageBox[0];
+			idFlag = idFlag[idFlag.length - 1];
+
+			var temp = 0;
+			//alert(Id-1 + "" +boxNo + " " + imagePos[Number(Id)-1] +" "+ imagePos[imagePos.indexOf(Number(boxNo))]);
+			var index = imagePos.indexOf(Number(boxNo));
+			temp = imagePos[Number(Id) - 1];
+			//	alert(imagePos);
+			imagePos[Number(Id) - 1] = imagePos[index];
+			//	alert(imagePos);
+			imagePos[index] = temp;
+			//	alert(imagePos);
+			imageBox[Id].className += " " + imageBox[9].classList[1];
+			imageBox[9].classList.remove(imageBox[Id].classList[1]);
+			imageBox[9].className += " " + imageBox[0];
+
+			var index1 = puzzleBoard.indexOf(9);
+			var index2 = puzzleBoard.indexOf(Number(Id));
+			// console.log(index);
+			// console.log(Number(boxNo));
+			temp = puzzleBoard[index1];
+			//	console.log(temp);
+			puzzleBoard[index1] = puzzleBoard[index2];
+			//	alert(imagePos);
+			puzzleBoard[index2] = temp;
+
+			flag[boxNo] = false;
+			flag[idFlag] = true;
+
+		}
+		function btnEnable() {
+				for (var i = 0; i < 3; i++) {
+					document.getElementsByTagName("button")[i].disabled = false;
+				}
+			}
+			function btnDisable() {
+				for (var i = 0; i < 3; i++) {
+					document.getElementsByTagName("button")[i].disabled = true;
+				}
+			}
+		function ChangeImage(){
+			//console.log(document.getElementById("image-file").value);
+			//document.getElementsByTagName("img").src = ""
+			var fReader = new FileReader();
+			fReader.readAsDataURL(document.getElementById("image-file").files[0]);
+			fReader.onloadend = function (event) {
+				var img = document.getElementsByTagName("img");
+				for(var i=0 ;i < img.length ; i++){
+					img[i].src = event.target.result;
+				}
+				//console.log(.path);
+			}
+		}
+	</script>
+	<script src="AI.js"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107567800-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107567800-1');
+</script>
+
+  
+</head>
+
+<body onLoad="valueInitialize();">
+	<div id="wrapper" class="container">
+		<h1>
+			AI Image Puzzle Solver
+			
+		</h1>
+
+		<div id ="boardImage" style="">
+			<img style="width:100%;height: 100%;"  />
+		</div>
+
+		<div id="board" style="">
+
+			<div id="img1" class="boxSize box1">
+				<img class="topRowImages firstColImages"  onclick="if(clickEvent)slide('img1'); else null" />
+			</div>
+			<div id="img2" class="boxSize box2 ">
+				<img class="topRowImages secondColImages"  style="left: -100%;" onclick="if(clickEvent)slide('img2'); else null"
+				/>
+			</div>
+			<div id="img3" class="boxSize box3">
+				<img class="topRowImages thirdColImages"  onclick="if(clickEvent)slide('img3'); else null" />
+			</div>
+
+			<div id="img4" class="boxSize box4">
+				<img class="middileRowImages firstColImages"  onclick="if(clickEvent)slide('img4'); else null" />
+			</div>
+			<div id="img5" class="boxSize box5">
+				<img class="middileRowImages secondColImages"  onclick="if(clickEvent)slide('img5'); else null" />
+			</div>
+			<div id="img6" class="boxSize box6">
+				<img class="middileRowImages thirdColImages"  onclick="if(clickEvent)slide('img6'); else null" />
+			</div>
+
+			<div id="img7" class="boxSize box7">
+				<img class="bottomRowImages firstColImages"  onclick="if(clickEvent)slide('img7'); else null" />
+			</div>
+			<div id="img8" class="boxSize box8">
+				<img class="bottomRowImages secondColImages"  onclick="if(clickEvent)slide('img8'); else null" />
+			</div>
+			<div id="img9" class="boxSize box9">
+				<img id="" class="bottomRowImages thirdColImages"  onclick="if(clickEvent)slide('img9'); else null"
+				/>
+			</div>
+			<!-- <div id="img10" class="boxSize box9">
+				<img class="bottomRowImages thirdColImages"  />
+			</div> -->
+		</div>
+
+		<textarea id="txtPS" class="form-control" readonly >
+		</textarea>
+		<div class="rdBtn">
+			<input type="file" id="image-file" onchange="ChangeImage()" multiple="false" class="btn btn-default  btn-block"/><br><br>
+			<button type="button" onclick="valueInitialize();Random();" class="btn btn-default  btn-block" id="btn-shuffle">Shuffle Image</button><br>
+			<small style="color: white">Please upload image and shuffle to solve<br></small>
+			<button type="button" id="solve-btn" onclick="clickEvent = false;btnDisable();Main();" class="btn btn-default  btn-block">Solve Puzzle</button><br><br>
+			<button type="button" id="steps-btn" onclick="checkSteps=true;clickEvent = true;Main();" class="btn btn-default  btn-block">Calculated Steps</button>
+		</div>
+	</div>
+</body>
+
+</html>
